@@ -61,5 +61,5 @@ for page in range(1,59):
     extend_metadata(content, metadata)      # extract info.
     time.sleep(2)                           # Be nice to dbnl, wait 2 seconds!
 
-with open('dbnl.json', 'w') as f:
+with open('resources/dbnl.json', 'w') as f:
     json.dump(metadata, f, indent=2)

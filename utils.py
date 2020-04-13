@@ -1,6 +1,18 @@
 import ebooklib
 from ebooklib import epub
 from bs4 import BeautifulSoup
+import json
+
+################################################################################
+# Load downloaded data from DBNL.
+
+def load_dbnl_data():
+    "Load data from DBNL"
+    with open('resources/dbnl.json') as f:
+        data = json.load(f)
+        for entry in data:
+            entry['genres'] = set(entry['genres'])
+        return data
 
 ################################################################################
 # Load text from epub.
