@@ -14,5 +14,6 @@ data = load_dbnl_data()
 selection = select_entries(data, ['proza'], exact=True, year_start=1900)
 
 for entry in selection:
+    print(f"Currently downloading: {entry['title']}, by {entry['author']}.")
     download_entry(entry, './proza/')
     time.sleep(2) # Be nice to DBNL
