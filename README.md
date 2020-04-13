@@ -13,10 +13,13 @@ Some of the Python syntax only works with versions >= 3.6.
 
 ## Contents
 
-* `index_dbnl.py` shows how to build an index of the files currently hosted at DBNL.
-* `accidental_haiku.py` shows how to detect accidental haikus in epub files.
-* `download_example.py` shows how to download a selection of the DBNL epub books.
-* `utils.py` provides useful functions that could be used elsewhere.
+There is one python file (`utils.py`) with general-purpose functions.
+The other files should be run in the following order, using `python FILENAME.py`:
+
+1. `index_dbnl.py` builds an index of the files currently hosted at DBNL.
+2. `download_example.py` downloads a selection of the DBNL epub books.
+3. `accidental_haiku.py` detects accidental haikus in the downloaded epub files.
+4. ...
 
 ## Project
 The current goal of this repository is to generate a book of single-sentence haikus,
