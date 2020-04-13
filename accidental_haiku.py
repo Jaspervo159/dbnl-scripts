@@ -1,6 +1,8 @@
+import glob
+import json
 import pyphen
 import spacy
-from utils import get_text, detokenize
+from utils import get_text, detokenize, load_dbnl_data, chunks
 
 dic = pyphen.Pyphen(lang='nl_NL')
 
@@ -42,14 +44,45 @@ def check_haiku(sentence):
     third_line = detokenize(third_line)
     return first_line, second_line, third_line
 
+
+nlp = spacy.load('nl_core_news_sm')
+
+def haikus_for_document(filename):
+    """
+    Analyzes a document for haikus. Returns a list of tuples.
+    """
+    text = get_text(filename)
+    # SpaCy has a maximum text size of 1,000,000 characters.
+    # Let's use one fewer to be on the safe side.
+    for chunk in chunks(text,999_999): # this underscore syntax was introduced in Python 3.6
+        doc = nlp(chunk)
+        haikus = []
+        for sent in doc.sents:
+            haiku = check_haiku(sent)
+            if haiku:
+                haikus.append(haiku)
+    return haikus
+
 ################################################################################
 # This does the actual work:
 
-nlp = spacy.load('nl_core_news_sm')
-text = get_text('viss012leve01_01.epub')
-doc = nlp(text)
-print("Start!")
-for sent in doc.sents:
-    haiku = check_haiku(sent)
-    if haiku:
-        print(haiku)
+if __name__ == "__main__":
+    data = load_dbnl_data()
+    index = {entry['download']['epub'].split('/')[-1]: entry for entry in data 
+                                                             if 'epub' in entry['download']}
+    
+    # This only works if there is a ./proza/ folder, with .epub files in it.
+    paths = glob.glob('./proza/*.epub')
+    filenames = []
+    total_haikus = 0
+    for i, path in enumerate(paths,start=1):
+        filename = path.split('/')[-1]
+        filenames.append(filename)
+        haikus = haikus_for_document(path)
+        index[filename]['haikus'] = haikus
+        total_haikus += len(haikus)
+        print(f"File {i}/{len(paths)}. Total number of haikus: {total_haikus}")
+
+    selection = {key: index[key] for key in filenames}
+    with open('haikus.json', 'w') as f:
+        json.dump(selection, f)
