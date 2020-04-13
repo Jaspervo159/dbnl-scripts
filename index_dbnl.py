@@ -46,7 +46,7 @@ def extract_metadata(row):
 
 def extend_metadata(content, metadata):
     "Extract metadata from page and add it to the metadata list."
-    soup = BeautifulSoup(content)
+    soup = BeautifulSoup(content, features="lxml")
     table = soup.find_all('tr')
     table_body = table[1:]
     for row in table_body:
