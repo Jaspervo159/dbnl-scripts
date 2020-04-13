@@ -16,6 +16,9 @@ def count_syllables(token):
 
 
 def check_haiku(sentence):
+    """
+    Checks whether is a sentence fits the (simplified) criteria for a haiku.
+    """
     first, second, third = 0, 0, 0
     first_line = []
     second_line = []
