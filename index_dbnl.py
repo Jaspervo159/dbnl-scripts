@@ -28,7 +28,7 @@ def get_download_links(row):
         if 'download' in link.attrs:
             url = link['href']
             extension = url.split('.')[-1]
-            result[extension] = url
+            result[extension] = 'https://www.dbnl.org' + url
     return result
 
 ################################################################################
