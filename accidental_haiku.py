@@ -2,7 +2,7 @@ import glob
 import json
 import pyphen
 import spacy
-from utils import get_text, detokenize, load_dbnl_data, chunks
+from utils import get_text, detokenize, load_dbnl_data, chunks, store_dbnl_data
 
 dic = pyphen.Pyphen(lang='nl_NL')
 
@@ -87,5 +87,4 @@ if __name__ == "__main__":
         print(f"File {i}/{len(paths)}. Total number of haikus: {total_haikus}")
 
     selection = {key: index[key] for key in filenames}
-    with open('haikus.json', 'w') as f:
-        json.dump(selection, f)
+    store_dbnl_data(selection, 'haikus.json')

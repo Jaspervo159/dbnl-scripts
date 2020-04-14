@@ -8,7 +8,7 @@ from lxml.etree import XMLSyntaxError
 import warnings
 
 ################################################################################
-# Load downloaded data from DBNL, select relevant entries, and download specific entries.
+# Manage data from DBNL.
 
 def load_dbnl_data():
     "Load data from DBNL"
@@ -17,6 +17,22 @@ def load_dbnl_data():
         for entry in data:
             entry['genres'] = set(entry['genres'])
         return data
+
+
+class SetEncoder(json.JSONEncoder):
+   def default(self, obj):
+      if isinstance(obj, set):
+         return list(obj)
+      return json.JSONEncoder.default(self, obj)
+
+
+def store_dbnl_data(data, path):
+    """
+    Store DBNL data that is loaded using load_dbnl_data().
+    This transforms sets into lists again, making it possible to save them as JSON.
+    """
+    with open(path, 'w') as f:
+        json.dump(data, f, cls=SetEncoder, indent=2)
 
 
 def select_entries(data, 
