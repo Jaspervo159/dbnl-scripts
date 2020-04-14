@@ -3,6 +3,8 @@ import json
 import pyphen
 import spacy
 from utils import get_text, detokenize, load_dbnl_data, chunks, store_dbnl_data
+from multiprocessing import Pool
+from itertools import repeat
 
 dic = pyphen.Pyphen(lang='nl_NL')
 
@@ -66,6 +68,49 @@ def haikus_for_document(filename):
                 haikus.append(haiku)
     return haikus
 
+
+def haikus_for_documents(paths):
+    """
+    Extract haikus from all documents, update the index, 
+    and return list of filenames of processed files.
+    """
+    results = []
+    total_haikus = 0
+    for i, path in enumerate(paths,start=1):
+        filename = path.split('/')[-1]
+        haikus = haikus_for_document(path)
+        results.append((filename, haikus))
+        total_haikus += len(haikus)
+        print(f"File {i}/{len(paths)}. Total number of haikus: {total_haikus}")
+    return results
+
+
+def single_process(path):
+    "Helper function for the multiprocessing function."
+    filename = path.split('/')[-1]
+    haikus = haikus_for_document(path)
+    print(f"Processed file: {filename}. Found {len(haikus)} haikus.")
+    return filename, haikus
+
+
+def haiku_multiprocessing(paths, num_processes=2):
+    """
+    Extract haikus from all documents, update the index, 
+    and return list of filenames of processed files.
+    """
+    with Pool(num_processes) as pool:
+        results = pool.map(single_process, paths)
+    return results
+
+
+def compile_results(results, index):
+    "Compile results in a dictionary."
+    selection = dict()
+    for filename, haikus in results:
+        selection[filename] = index[filename]
+        selection[filename]['haikus'] = haikus
+    return selection
+
 ################################################################################
 # This does the actual work:
 
@@ -76,15 +121,7 @@ if __name__ == "__main__":
     
     # This only works if there is a ./proza/ folder, with .epub files in it.
     paths = glob.glob('./proza/*.epub')
-    filenames = []
-    total_haikus = 0
-    for i, path in enumerate(paths,start=1):
-        filename = path.split('/')[-1]
-        filenames.append(filename)
-        haikus = haikus_for_document(path)
-        index[filename]['haikus'] = haikus
-        total_haikus += len(haikus)
-        print(f"File {i}/{len(paths)}. Total number of haikus: {total_haikus}")
-
-    selection = {key: index[key] for key in filenames}
+    # filenames = haikus_for_documents(paths, index)
+    results = haiku_multiprocessing(paths, num_processes=2)
+    selection = compile_results(results, index)
     store_dbnl_data(selection, 'haikus.json')
