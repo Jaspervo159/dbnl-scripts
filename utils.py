@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import json
 import urllib.request
 import os
+from lxml.etree import XMLSyntaxError
+import warnings
 
 ################################################################################
 # Load downloaded data from DBNL, select relevant entries, and download specific entries.
@@ -61,7 +63,11 @@ def download_entry(entry, folder):
 
 def get_text(filename):
     "Get text from an epub file."
-    book = epub.read_epub(filename)
+    try:
+        book = epub.read_epub(filename)
+    except (AttributeError, XMLSyntaxError):
+        warnings.warn(f"File seems to be corrupt: {filename}. Returning empty string.", RuntimeWarning)
+        return ''
     texts = []
     for doc in book.get_items_of_type(ebooklib.ITEM_DOCUMENT):
         content = doc.content
