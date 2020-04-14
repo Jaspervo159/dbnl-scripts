@@ -19,6 +19,7 @@ def load_dbnl_data():
         return data
 
 
+# Source: https://stackoverflow.com/a/8230505/2899924
 class SetEncoder(json.JSONEncoder):
    def default(self, obj):
       if isinstance(obj, set):

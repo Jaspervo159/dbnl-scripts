@@ -55,11 +55,11 @@ def haikus_for_document(filename):
     Analyzes a document for haikus. Returns a list of tuples.
     """
     text = get_text(filename)
+    haikus = []
     # SpaCy has a maximum text size of 1,000,000 characters.
     # Let's use one fewer to be on the safe side.
     for chunk in chunks(text,999_999): # this underscore syntax was introduced in Python 3.6
         doc = nlp(chunk)
-        haikus = []
         for sent in doc.sents:
             haiku = check_haiku(sent)
             if haiku:
