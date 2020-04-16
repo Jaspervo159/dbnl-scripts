@@ -1,5 +1,5 @@
 # dbnl-scripts
-Scripts to scrape DBNL and work with the texts.
+Scripts to scrape DBNL and work with the texts ...and to generate a book with accidental haikus.
 
 ## Project
 I used the code in this repository to generate a book of single-sentence haikus,
