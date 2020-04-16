@@ -14,6 +14,7 @@ All code is written in Python 3. Libraries that need to be installed:
 * ebooklib
 * BeautifulSoup
 * Pyphen
+* pylatexenc
 
 Some of the Python syntax only works with versions >= 3.6.
 

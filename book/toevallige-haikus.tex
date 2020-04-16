@@ -1,0 +1,107 @@
+% book example for classicthesis.sty
+\RequirePackage{silence} % :-\
+    \WarningFilter{scrbook}{Usage of package `titlesec'}
+    \WarningFilter{titlesec}{Non standard sectioning command detected}
+\documentclass[11pt,paper=a4,footinclude,headinclude]{scrbook} % KOMA-Script book
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{lipsum}
+\usepackage[linedheaders=false]{classicthesis} % ,manychapters
+\usepackage[dutch]{babel}
+\usepackage{needspace}
+\renewcommand{\thechapter}{\alph{chapter}}
+\renewcommand\thesection{\arabic{section}.}
+\setcounter{secnumdepth}{1}
+
+\renewcommand{\textthreesuperior}{$^{3}$}
+\usepackage{xfrac}
+\renewcommand{\textonehalf}{\sfrac{1}{2}}
+\usepackage{soul}
+\newcommand{\cyryhcrs}{\st{Y}}
+% Introduced to fix all character issues:
+%\usepackage{textcomp}
+%
+%\DeclareUnicodeCharacter{0364}{\r{i}}
+%\DeclareUnicodeCharacter{030A}{\r{v}}
+%\DeclareUnicodeCharacter{1E98}{\r{w}}
+%\DeclareUnicodeCharacter{0351}{e}%\textlefthalfring{e}}
+
+%\usepackage{fourier}
+%\DeclareUnicodeCharacter{2766}{\aldine}
+%\DeclareUnicodeCharacter{1F00}{\`{$\alpha$}}
+%\DeclareUnicodeCharacter{1F10}{\`{$\epsilon$}}
+%\DeclareUnicodeCharacter{1F31}{\'{$\iota$}}
+%\DeclareUnicodeCharacter{1FBD}{'}
+%\DeclareUnicodeCharacter{1F76}{\`{$\iota$}}
+%\DeclareUnicodeCharacter{1F40}{\'{o}}
+%\usepackage{adforn}
+%\DeclareUnicodeCharacter{2767}{\adfsmallhangingleafright}
+
+\begin{document}
+\begin{titlepage}
+    %\pdfbookmark[1]{\myTitle}{titlepage}
+    % if you want the titlepage to be centered, uncomment and fine-tune the line below (KOMA classes environment)
+    \begin{addmargin}[-1cm]{-3cm}
+    \begin{center}
+        \large
+
+        \hfill
+
+        \vfill
+
+        \begingroup
+            \color{CTtitle}\spacedallcaps{Toevallige Haiku's} \\ \bigskip
+        \endgroup
+	
+        \spacedlowsmallcaps{Emiel van Miltenburg}\\ \bigskip
+        \small{\textit{Eerste editie, Lente 2020}}
+        \vfill
+        \null
+    \end{center}
+  \end{addmargin}
+\end{titlepage}
+
+    \tableofcontents
+
+\newcommand{\haiku}[3]{\needspace{3\baselineskip}\noindent #1\\#2\\#3}
+
+%    \chapter{Vijftig auteurs, vierhonderdzevenentwintig haiku's}
+%	\section{Aart Staartjes}
+%	\subsection{\textrm{Uit}: Sesamstraat (2020)}
+%	\haiku{bla bla bla bla bla bla bla}{bla bla bla bla bla bla bla}{bla bla bla bla bla}\\
+%	
+%	\haiku{bla bla bla bla bla bla bla}{bla bla bla bla bla bla bla}{bla bla bla bla bla}
+%	
+%	\section{Anton Heijboer}
+
+
+%
+\input{chapters/a.tex}
+\input{chapters/b.tex}
+\input{chapters/c.tex}
+\input{chapters/d.tex}
+\input{chapters/e.tex}
+\input{chapters/f.tex}
+\input{chapters/g.tex}
+\input{chapters/h.tex}
+\input{chapters/i.tex}
+\input{chapters/j.tex}
+\input{chapters/k.tex}
+\input{chapters/l.tex}
+\input{chapters/m.tex}
+\input{chapters/n.tex}
+\input{chapters/o.tex}
+\input{chapters/p.tex}
+\input{chapters/q.tex} 
+\input{chapters/r.tex}
+\input{chapters/s.tex}
+\input{chapters/t.tex}
+\input{chapters/u.tex}
+\input{chapters/v.tex}
+\input{chapters/w.tex}
+\input{chapters/z.tex}
+\input{chapters/varia.tex}
+\end{document}

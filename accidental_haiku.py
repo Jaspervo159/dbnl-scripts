@@ -73,6 +73,8 @@ def haikus_for_documents(paths):
     """
     Extract haikus from all documents, update the index, 
     and return list of filenames of processed files.
+    
+    This function provides a single-threaded alternative to haiku_multiprocessing.
     """
     results = []
     total_haikus = 0
