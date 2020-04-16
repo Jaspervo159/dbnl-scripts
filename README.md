@@ -2,10 +2,11 @@
 Scripts to scrape DBNL and work with the texts.
 
 ## Project
-The current goal of this repository is to generate a book of single-sentence haikus,
-automatically collected from DBNL. 
-The first edition of the book will be automatically generated, and typeset in LaTeX.
-There may or may not be a second, manually curated edition.
+I used the code in this repository to generate a book of single-sentence haikus,
+automatically collected from DBNL.
+ 
+The [first edition of the book](./book/toevallige-haikus.pdf) has been automatically generated, and typeset in LaTeX.
+There may or may not be a second, manually curated edition. (At 5,323 pages, this would be a lot of work!)
 
 ## Requirements
 All code is written in Python 3. Libraries that need to be installed:
@@ -25,4 +26,7 @@ The other files should be run in the following order, using `python FILENAME.py`
 1. `index_dbnl.py` builds an index of the files currently hosted at DBNL.
 2. `download_example.py` downloads a selection of the DBNL epub books.
 3. `accidental_haiku.py` detects accidental haikus in the downloaded epub files.
-4. ...
+4. `generate_chapters.py` produces chapters for a book exhibiting all accidental haikus.
+
+## The book
+LaTeX source code for the book can be found in the `./book/` folder.
