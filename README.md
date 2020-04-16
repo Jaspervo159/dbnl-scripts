@@ -6,7 +6,7 @@ I used the code in this repository to generate a book of single-sentence haikus,
 automatically collected from DBNL.
  
 The [first edition of the book](./book/toevallige-haikus.pdf) has been automatically generated, and typeset in LaTeX.
-There may or may not be a second, manually curated edition. (At 5,323 pages, this would be a lot of work!)
+There may or may not be a second, manually curated edition. (At 5,325 pages, this would be a lot of work!)
 
 ## Requirements
 All code is written in Python 3. Libraries that need to be installed:
