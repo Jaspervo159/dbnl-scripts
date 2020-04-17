@@ -32,37 +32,49 @@ GETALLEN  = {1: 'een',
              1000: 'duizend'}
 
 def number_to_word(number):
+    """
+    Convert integers to a fully written out Dutch number.
+    Works for integers up to (but not including) 1,000,000.
+    """
     if number in GETALLEN:
         return GETALLEN[number]
-    
     last_digit = number % 10
     tens = number // 10
     hundreds = number // 100
     thousands = number // 1000
     if number < 20:
         return GETALLEN[last_digit] + 'tien'
+        
     if number < 100:    
         if last_digit in {2,3}:
             return f"{GETALLEN[last_digit]}ën{GETALLEN[tens * 10]}"
         else:
             return f"{GETALLEN[last_digit]}en{GETALLEN[tens * 10]}"
+    
     if number < 200:
         return f"honderd{number_to_word(number - 100)}"
+    
     if number % 100 == 0:
         return f"{number_to_word(hundreds)}honderd"
+    
     if number < 1000:
         rounded_down = hundreds * 100
         return f"{number_to_word(rounded_down)}{number_to_word(number - rounded_down)}"
+    
     if number % 1000 == 0:
         return f"{number_to_word(thousands)}duizend"
+    
     if number < 1100:
         return f"duizend{number_to_word(number-1000)}"
+    
     if number < 2000:
         rounded_down = hundreds * 100
         return f"{number_to_word(hundreds)}honderd{number_to_word(number-rounded_down)}"
+    
     else:
         rounded_down = thousands * 1000
         return f"{number_to_word(thousands)}duizend{number_to_word(number - rounded_down)}"
+
 
 def alphabetize(entries):
     "Sort the entries by alphabet, so that it's easier to print them."
@@ -150,7 +162,8 @@ def preprocess_entries(entries):
     return results
 
 
-entries = load_haiku_data()
-entries = preprocess_entries(entries)
-ordered = alphabetize(entries)
-write_chapters(ordered)
+if __name__ == "__main__":
+    entries = load_haiku_data()
+    entries = preprocess_entries(entries)
+    ordered = alphabetize(entries)
+    write_chapters(ordered)
