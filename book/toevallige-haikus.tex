@@ -8,6 +8,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{wasysym}
 \usepackage{lipsum}
 \usepackage[linedheaders=false]{classicthesis} % ,manychapters
 \usepackage[dutch]{babel}
@@ -21,24 +22,6 @@
 \renewcommand{\textonehalf}{\sfrac{1}{2}}
 \usepackage{soul}
 \newcommand{\cyryhcrs}{\st{Y}}
-% Introduced to fix all character issues:
-%\usepackage{textcomp}
-%
-%\DeclareUnicodeCharacter{0364}{\r{i}}
-%\DeclareUnicodeCharacter{030A}{\r{v}}
-%\DeclareUnicodeCharacter{1E98}{\r{w}}
-%\DeclareUnicodeCharacter{0351}{e}%\textlefthalfring{e}}
-
-%\usepackage{fourier}
-%\DeclareUnicodeCharacter{2766}{\aldine}
-%\DeclareUnicodeCharacter{1F00}{\`{$\alpha$}}
-%\DeclareUnicodeCharacter{1F10}{\`{$\epsilon$}}
-%\DeclareUnicodeCharacter{1F31}{\'{$\iota$}}
-%\DeclareUnicodeCharacter{1FBD}{'}
-%\DeclareUnicodeCharacter{1F76}{\`{$\iota$}}
-%\DeclareUnicodeCharacter{1F40}{\'{o}}
-%\usepackage{adforn}
-%\DeclareUnicodeCharacter{2767}{\adfsmallhangingleafright}
 
 \begin{document}
 \begin{titlepage}
@@ -80,15 +63,6 @@ Wat mij aantrekt in deze verzameling toevallige haiku's, naast de ruwheid van de
 
 \newcommand{\haiku}[3]{\needspace{3\baselineskip}\noindent #1\\#2\\#3}
 
-%    \chapter{Vijftig auteurs, vierhonderdzevenentwintig haiku's}
-%	\section{Aart Staartjes}
-%	\subsection{\textrm{Uit}: Sesamstraat (2020)}
-%	\haiku{bla bla bla bla bla bla bla}{bla bla bla bla bla bla bla}{bla bla bla bla bla}\\
-%	
-%	\haiku{bla bla bla bla bla bla bla}{bla bla bla bla bla bla bla}{bla bla bla bla bla}
-%	
-%	\section{Anton Heijboer}
-
 \mainmatter
 
 \input{chapters/a.tex}
@@ -114,8 +88,8 @@ Wat mij aantrekt in deze verzameling toevallige haiku's, naast de ruwheid van de
 \input{chapters/u.tex}
 \input{chapters/v.tex}
 \input{chapters/w.tex}
-\setcounter{chapter}{26}
+\renewcommand{\thechapter}{z}
 \input{chapters/z.tex}
-\renewcommand{\thechapter}{Varia}
+\renewcommand{\thechapter}{*}
 \input{chapters/varia.tex}
 \end{document}
